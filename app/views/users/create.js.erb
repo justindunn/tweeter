@@ -1,0 +1,6 @@
+$('#users-table tbody').append("<%= j render @user %>");
+<% if @user.errors.empty? %>
+  $(".notice").html('<%= j render partial: "layouts/alerts", locals: { notice: flash[:notice] } %>');
+<% else %>
+  $(".alert").html('<%= j render partial: "layouts/alerts", locals: { alert: flash[:alert] } %>');
+<% end %>

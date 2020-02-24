@@ -1,0 +1,47 @@
+<% if @user.errors.any? %>
+  <%= content_tag :div, id: 'error_explanation' do %>
+    <%= content_tag :ul do %>
+      <% @user.errors.full_messages.each do |m| %>
+        <%= content_tag(:li, m)%>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'modal-header' do %>
+  <% if action_name == 'edit' %>
+    <%= content_tag(:h3, 'Edit User', id: 'editUserLabel') %>
+  <% else %>
+    <%= content_tag(:h3, 'New User', id: 'newUserLabel') %>
+    <%= content_tag(:button, 'x', class: 'close', 'data-dismiss': 'modal', 'aria-hidden': true) %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: ['modal-body', 'new-user-form-wrapper'] do %>
+  <%= form_with model: @user, id: 'user-form', remote: true do |f| %>
+    <%= content_tag :div, class: 'form-group' do %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'form-group' do %>
+      <%= f.label :email %>
+      <%= f.text_field :email, class: 'form-control' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'form-group' do %>
+      <%= f.label :twitter_handle %>
+      <%= f.text_field :twitter_handle, class: 'form-control' %>
+    <% end %>
+
+    <%= content_tag :div, class: 'modal-footer' do %>
+      <% if action_name == 'edit' %>
+        <%= link_to 'Cancel', users_path, class: 'btn' %>
+        <%= f.submit "Update User", class: 'btn btn-primary', id: 'edit-user-submit-button' %>
+      <% else %>
+        <%= content_tag(:button, 'Cancel', 'data-dismiss': 'modal', 'aria-hidden': true, class: 'btn') %>
+        <%= f.submit "Create User", class: 'btn btn-primary', id: 'create-user-submit-button' %>
+      <% end %>     
+    <% end %>
+  <% end %>
+<% end %>

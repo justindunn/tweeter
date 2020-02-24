@@ -1,0 +1,18 @@
+$("#new-user-modal .modal-content").html("<%= j render "users/form" %>");
+$('#new-user-modal').modal();
+$('#user-form').submit(function(e) {
+
+  var serializedForm = $("#user-form").serialize();
+
+  $.ajax({
+    url: "/users",
+    data: serializedForm,
+    type: "POST",
+    success: function () {
+
+    }
+  });
+
+  $('#new-user-modal').modal('hide');
+  return false;
+});

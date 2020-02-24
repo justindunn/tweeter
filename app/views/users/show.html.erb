@@ -1,0 +1,23 @@
+<%= content_tag(:h1, @user.name) %>
+<%= content_tag(:h2, 'Twitter Handle: @' + @user.twitter_handle) %>
+<%= content_tag(:h3, 'Email: ' +@user.email) %>
+
+<%= content_tag :div, class: 'row mt-2' do %>
+  <%= content_tag :div, class: 'col-lg-12' do %>
+    <%= content_tag :div, class: ['md-form', 'mt-0'] do %>
+      <%= form_with(url: search_user_tweets_path(@user), method: "post", class: ['tweet-search-form', 'form-inline', 'md-form', 'mr-auto', 'w-100']) do %>
+        <%= hidden_field_tag :user_id, value: @user.id %>
+        <%= text_field_tag 'search', nil, class: ['form-control'], placeholder: "Search #{@user.name}'s Tweets!'", 'aria-label': 'Search', id: 'tweet-search' %>
+        <%= content_tag(:button, 'Search', type: 'submit', class: ['btn', 'btn-elegant', 'btn-small', 'ml-3', 'btn-dark']) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'row mt-2' do %>
+  <%= content_tag :div, class: 'col-lg-12', id: 'tweets-wrapper' do %>
+    <% @tweets.each do |tweet| %>
+      <%= render partial: 'users/tweet', locals: { tweet: tweet } %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,11 @@
+<%= content_tag :tr do %>
+  <%= content_tag(:td, user.name) %>
+  <%= content_tag(:td, user.email) %>
+  <%= content_tag(:td, "@#{user.twitter_handle}") %>
+  <%= content_tag :td do %>
+    <%= link_to 'Edit', edit_user_path(user), class: ['btn', 'btn-primary'] %>
+  <% end %>
+  <%= content_tag :td do %>
+    <%= link_to 'Show', user_path(user), class: ['btn', 'btn-primary'] %>
+  <% end %>
+<% end %>

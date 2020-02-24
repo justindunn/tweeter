@@ -1,0 +1,35 @@
+<%= tag.h1 'Twitter Users' %>
+<%= content_tag :div, class: 'row' do %>
+  <%= content_tag :div, class: 'col-lg-12' do %>
+    <%= content_tag(:p, 'Select a user below to view their tweets!') %>
+    <%= link_to 'Create User', new_user_path, class: ['btn', 'btn-success', 'float-right'], remote: true, "data-toggle": "modal", "data-target": "new-user-modal" %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'row mt-2' do %>
+  <%= content_tag :div, class: 'col-lg-12' do %>
+    <%= content_tag :table, class: 'table', id: 'users-table' do %>
+
+      <%= content_tag :thead do %>
+        <%= content_tag :tr do %>
+          <%= content_tag(:th, 'Name', class: 'col') %>
+          <%= content_tag(:th, 'Email', class: 'col') %>
+          <%= content_tag(:th, 'Twitter Handle', class: 'col') %>
+          <%= content_tag(:th, 'Actions', class: 'col', colspan: '2') %>
+        <% end %>
+      <% end %>
+
+      <%= content_tag :tbody do %>
+        <%= render @users %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: ['modal', 'hide', 'fade'], id: 'new-user-modal', title: 'New User' do %>
+  <%= content_tag :div, class: 'modal-dialog', role: 'document' do %>
+    <%= content_tag :div, class: 'modal-content' do %>
+
+    <% end %>
+  <% end %>
+<% end %>

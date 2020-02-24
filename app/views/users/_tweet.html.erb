@@ -1,0 +1,19 @@
+<% status = @user.tweets.where(tweet_id: tweet.id).exists? ? 'saved' : 'not-saved' %>
+<%= content_tag :div, class: ['card mt-2', status] do %>
+  <%= content_tag :div, class: 'card-body' do %>
+    <%= content_tag(:p, tweet.text) %>
+
+    <% if status == 'saved' %>
+      <%= content_tag(:p, 'This tweet has been saved!') %>
+    <% else %>
+      <%= content_tag :div, class: 'save-tweet-wrapper' do %>
+        <%= form_with model: Tweet, url: user_tweets_path(@user), method: "post", class: 'tweet-form', id: "tweet-form-#{tweet.id}", remote: true do |f| %>
+          <%= f.hidden_field :tweet_id, value: tweet.id %>
+          <%= f.hidden_field :message, value: tweet.text %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <%= f.submit "Save Tweet!", class: 'btn btn-primary', id: 'create-tweet-submit-button' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
